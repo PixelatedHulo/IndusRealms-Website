@@ -1,52 +1,44 @@
-Indus Realms – Official Website
+Indus Realms – Official Website 🌐
+<p align="center"> <img src="https://via.placeholder.com/600x150?text=Indus+Realms+Website+Banner" alt="Indus Realms Banner"/> </p> <p align="center"> <b>Official website for the Indus Realms Minecraft Network.</b><br> Built with modern, fast, and scalable web technologies. </p>
+Badges 📛
+<p align="left"> <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"/> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white"/> <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge"/> </p>
+1. Features Included ✨
 
-Technology Used:
+📱 Fully responsive design for all screen sizes
 
-TypeScript
+🌙 Modern dark theme with a clean UI
 
-Next.js
+📊 Live player count for the Minecraft server
 
-React
+👥 Staff page (names + avatars)
 
-Tailwind CSS
+❓ FAQ page (fully configurable)
 
-1. Features Included
+📰 Blog / Updates page for news & announcements
 
-Fully responsive design compatible with all devices.
+📘 Rules page for all server rules
 
-Modern dark-themed user interface.
+🗳️ Vote page (manual leaderboard + voting links)
 
-Live player count display for the Minecraft server.
+🛒 Store page (redirect or optional backend integration)
 
-Staff page showcasing team members.
+💬 Discord info page
 
-FAQ page with fully configurable questions and answers.
+🧩 All text & links configurable without touching code
 
-Blog/Updates page for news, events, and announcements.
+🎨 Full CSS access in globals.css + component-level styles
 
-Rules page for listing all server rules.
+2. Tech Stack 🧰
 
-Vote page with manual leaderboard and external voting links.
+⚡ Next.js
 
-Store page that redirects to the official store (optional backend integration).
+⚛️ React
 
-Discord page with server information and invite link.
+🟦 TypeScript
 
-All text, links, and content are fully configurable.
+🎨 Tailwind CSS
 
-Complete CSS accessibility for customization through globals.css and component-level styling.
-
-2. Tech Stack
-
-Next.js
-
-React
-
-TypeScript
-
-Tailwind CSS
-
-3. How to Run Locally
+3. How to Run Locally 🖥️
 git clone https://github.com/<your-org>/<your-repo>.git
 cd <your-repo>
 
@@ -54,17 +46,16 @@ npm install
 npm run dev
 
 
-Local development URL:
-http://localhost:3000
+➡️ Visit: http://localhost:3000
 
-4. Production Build
+4. Production Build 🚀
 npm run build
 npm start
 
-5. Live Website
+5. Live Website 🌍
 
 https://indusrealms.com
 
-6. License
+6. License 📄
 
 MIT License
