@@ -1,0 +1,289 @@
+{
+  "title": "SERVER STORE",
+  "description": "Support our server by purchasing {category}! All proceeds go towards server maintenance and future updates.",
+  "paymentInfo": {
+    "title": "Payment Information",
+    "description": "All purchases are subject to our TOS and can't be refunded. They are processed within 5 minutes of purchase when you are online on the server. These purchases are processed through a 3rd-party web store service."
+  },
+  "categories": {
+    "ranks": {
+      "title": "SERVER RANKS",
+      "items": [
+        {
+          "name": "KNIGHT",
+          "price": "₹80 / month",
+          "icon": "faStar",
+          "tagline": "Begin your journey with essential quality-of-life perks.",
+          "badge": "Starter",
+          "badgeEmoji": "⭐",
+          "description": "Starter rank with core perks.",
+          "features": [
+            "Colored chat & nickname",
+            "3 home locations",
+            "Basic cosmetics",
+            "Priority support (basic)"
+          ],
+          "kitImage": "/kits/knight.png"
+        },
+        {
+          "name": "LORD",
+          "price": "₹220 / month",
+          "icon": "faCrown",
+          "tagline": "Command more—utility boosts and extra homes.",
+          "badge": "Popular",
+          "badgeEmoji": "👑",
+          "description": "Unlock more commands and extra homes.",
+          "features": [
+            "All Knight features",
+            "/heal (cooldown) & /feed",
+            "5 home locations",
+            "VIP-only areas"
+          ],
+          "kitImage": "/kits/lord.png"
+        },
+        {
+          "name": "PALADIN",
+          "price": "₹680 / month",
+          "icon": "faGem",
+          "tagline": "Premium power with a bigger toolkit for veterans.",
+          "badge": "Best Value",
+          "badgeEmoji": "💎",
+          "description": "Premium perks and a bigger utility toolkit.",
+          "features": [
+            "All Lord features",
+            "/back command",
+            "10 home locations",
+            "Extra cosmetics"
+          ],
+          "kitImage": "/kits/paladin.png"
+        },
+        {
+          "name": "DUKE",
+          "price": "₹999 / month",
+          "icon": "faBox",
+          "tagline": "Showtime—visual flair and world control tools.",
+          "badge": "Elite",
+          "badgeEmoji": "🛡️",
+          "description": "High-tier rank with flashy effects and control.",
+          "features": [
+            "All Paladin features",
+            "Weather control",
+            "Particle effects",
+            "Duke-only zones"
+          ],
+          "kitImage": "/kits/duke.png"
+        },
+        {
+          "name": "KING",
+          "price": "₹1600 / month",
+          "icon": "faCrown",
+          "tagline": "Rule the realms with top-tier access and priority support.",
+          "badge": "Ultimate",
+          "badgeEmoji": "🔥",
+          "description": "Ultimate rank with the best perks and monthly benefits.",
+          "features": [
+            "All Duke features",
+            "Item spawning (limited)",
+            "Unlimited homes",
+            "Priority support"
+          ],
+          "kitImage": "/kits/king.png"
+        }
+      ]
+    },
+
+    "coins": {
+      "title": "COIN PACKS [CLASSIC]",
+      "items": [
+        {
+          "name": "15600 Coins",
+          "price": "₹999",
+          "icon": "faBox",
+          "description": "Massive coin bundle – perfect for ranks, keys and big upgrades.",
+          "features": [
+            "Best value per coin",
+            "Ideal for high-tier ranks",
+            "Great for bulk crate keys",
+            "Recommended for long-term players"
+          ]
+        },
+        {
+          "name": "7800 Coins",
+          "price": "₹699",
+          "icon": "faBox",
+          "description": "Big stash of coins to unlock multiple perks and cosmetics.",
+          "features": [
+            "Great mid-tier value",
+            "Enough for several rank upgrades",
+            "Perfect for regular players",
+            "Combo well with crate keys"
+          ]
+        },
+        {
+          "name": "5660 Coins",
+          "price": "₹499",
+          "icon": "faBox",
+          "description": "Solid pack for upgrading your experience without breaking the bank.",
+          "features": [
+            "Balanced value & price",
+            "Good for cosmetics + keys",
+            "Nice boost for weekend grinding",
+            "Starter pack for upgrades"
+          ]
+        },
+        {
+          "name": "2800 Coins",
+          "price": "₹249",
+          "icon": "faBox",
+          "description": "Entry coin pack to grab a few keys or cosmetics.",
+          "features": [
+            "Perfect for testing the store",
+            "Good for a few crate keys",
+            "Nice for small upgrades",
+            "Great impulse purchase"
+          ]
+        },
+        {
+          "name": "1500 Coins",
+          "price": "₹149",
+          "icon": "faBox",
+          "description": "Small coin bundle for light upgrades and fun extras.",
+          "features": [
+            "Affordable starter pack",
+            "Good for cosmetics and boosts",
+            "Gift-friendly amount",
+            "Nice for casual players"
+          ]
+        },
+        {
+          "name": "700 Coins",
+          "price": "₹79",
+          "icon": "faBox",
+          "description": "Micro coin pack – just enough for a little something extra.",
+          "features": [
+            "Cheapest way to support the server",
+            "Good for a single small purchase",
+            "Perfect for first-time buyers",
+            "Great micro-upgrade option"
+          ]
+        }
+      ]
+    },
+
+    "cosmetics": {
+      "title": "COSMETIC ITEMS",
+      "items": [
+        {
+          "name": "Fire Wings",
+          "price": "₹699",
+          "icon": "faMagic",
+          "description": "Blazing wings that leave a trail of fire particles behind you.",
+          "features": [
+            "Animated fire effects",
+            "Particle trail",
+            "Multiple color variants",
+            "Toggle on/off",
+            "Exclusive to store"
+          ]
+        },
+        {
+          "name": "Lava Crown",
+          "price": "₹999",
+          "icon": "faCrown",
+          "description": "A majestic crown that glows with molten lava effects.",
+          "features": [
+            "Glowing lava texture",
+            "Particle effects",
+            "Status symbol",
+            "Permanent unlock",
+            "Visible to all players"
+          ]
+        },
+        {
+          "name": "Dragon Pet",
+          "price": "₹1499",
+          "icon": "faMagic",
+          "description": "A loyal dragon companion that follows you around the server.",
+          "features": [
+            "Follows you everywhere",
+            "Interactive animations",
+            "Custom name",
+            "Special abilities",
+            "Rare and exclusive"
+          ]
+        },
+        {
+          "name": "Portal Trail",
+          "price": "₹499",
+          "icon": "faMagic",
+          "description": "Leave a mystical portal trail wherever you walk.",
+          "features": [
+            "Animated portal effects",
+            "Customizable colors",
+            "Toggle functionality",
+            "Visible to others",
+            "Unique visual effect"
+          ]
+        }
+      ]
+    },
+
+    "items": {
+      "title": "SPECIAL ITEMS",
+      "items": [
+        {
+          "name": "Flame Sword",
+          "price": "₹1299",
+          "icon": "faFistRaised",
+          "description": "A powerful sword that sets enemies ablaze with every strike.",
+          "features": [
+            "Fire Aspect III",
+            "Sharpness V",
+            "Unbreaking IV",
+            "Custom texture",
+            "Exclusive enchantments"
+          ]
+        },
+        {
+          "name": "Lava Pickaxe",
+          "price": "₹1099",
+          "icon": "faTools",
+          "description": "Mine faster than ever with this legendary lava-infused pickaxe.",
+          "features": [
+            "Efficiency VI",
+            "Fortune IV",
+            "Auto-smelt ability",
+            "Durability boost",
+            "Unique design"
+          ]
+        },
+        {
+          "name": "Phoenix Armor Set",
+          "price": "₹2499",
+          "icon": "faGem",
+          "description": "Complete armor set that grants fire immunity and special abilities.",
+          "features": [
+            "Fire immunity",
+            "Protection V",
+            "Custom texture",
+            "Set bonus effects",
+            "Legendary rarity"
+          ]
+        },
+        {
+          "name": "Teleport Bow",
+          "price": "₹1599",
+          "icon": "faFistRaised",
+          "description": "Teleport to wherever your arrow lands with this magical bow.",
+          "features": [
+            "Teleportation ability",
+            "Power V",
+            "Infinity enchant",
+            "Custom arrows",
+            "Unique mechanics"
+          ]
+        }
+      ]
+    }
+  }
+}

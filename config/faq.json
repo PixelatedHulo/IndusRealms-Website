@@ -1,0 +1,157 @@
+{
+  "title": "FREQUENTLY ASKED QUESTIONS",
+  "description": "Everything you need to know about Indus Realms — how to join, supported versions, game modes, rules, store, and support.",
+  "categories": [
+    {
+      "title": "About Indus Realms",
+      "questions": [
+        {
+          "question": "What is Indus Realms?",
+          "answer": "Indus Realms is a India–Mumbai hosted Minecraft network featuring SMP, BedWars, Lifesteal, Minigames and Skyblock. We support both Java and Bedrock so you can play from PC, mobile, or console."
+        },
+        {
+          "question": "Which editions and versions are supported?",
+          "answer": "Both Java and Bedrock are supported. Our current target version is 1.21.8. Java players can join with 1.21.x; Bedrock players can connect from the latest Bedrock client."
+        },
+        {
+          "question": "How do I connect?",
+          "answer": "Use our domain for the easiest experience: mc.indusrealms.com. If needed, you can also use the numeric address 150.230.237.207:2016."
+        },
+        {
+          "question": "Where is the server hosted?",
+          "answer": "We are hosted in India (Mumbai) for the lowest latency across the region."
+        }
+      ]
+    },
+    {
+      "title": "Getting Started",
+      "questions": [
+        {
+          "question": "How do I join the server?",
+          "answer": "Java: Multiplayer → Add Server → Server Address: mc.indusrealms.com → Join. Bedrock (mobile/console/Windows): Play → Servers → Add Server → Address: mc.indusrealms.com, Port: 2016 → Save & Join."
+        },
+        {
+          "question": "Do I need any mods to play?",
+          "answer": "No mods are required. Vanilla clients work fine. (Optional) Performance mods like Sodium/OptiFine are okay as long as they don’t give unfair advantages."
+        },
+        {
+          "question": "Can I play on mobile or console?",
+          "answer": "Yes. Because we support Bedrock, you can join from iOS/Android, Xbox, PlayStation and Switch using the Address mc.indusrealms.com and Port 2016."
+        }
+      ]
+    },
+    {
+      "title": "Game Modes & Features",
+      "questions": [
+        {
+          "question": "What game modes do you offer?",
+          "answer": "SMP, BedWars, Lifesteal, Minigames and Skyblock — jump in from the lobby and play the way you like."
+        },
+        {
+          "question": "What are the key features on the network?",
+          "answer": "Claims/land protection, economy, crates, RTP, jobs, skills, /tpa teleport, levels, KOTH, auction house, voting rewards, PvP, AFK rewards, chat games, factory, cosmetics, tool skins, quests, coins & coinshop and more."
+        },
+        {
+          "question": "Is PvP enabled?",
+          "answer": "PvP depends on the mode/area. PvP is active where the game mode intends (e.g., Lifesteal, arenas, certain zones). SMP/Skyblock may have safe areas and PvP-enabled regions. Always read the mode’s rules at spawn."
+        },
+        {
+          "question": "Do you have AFK rewards?",
+          "answer": "Yes. Every 5 minutes AFK: +1 Coin. Every 30 minutes AFK: +1 Common Crate Key. Stay within the designated AFK area as instructed in-game."
+        }
+      ]
+    },
+    {
+      "title": "Protection & Rules",
+      "questions": [
+        {
+          "question": "How do I protect my builds?",
+          "answer": "Use claims/land-protection as instructed in-game to secure your area. If something goes wrong, open a ticket on Discord — staff will help with rollbacks where possible."
+        },
+        {
+          "question": "Top server rules (quick list)",
+          "answer": "No hacking/cheats; no griefing or stealing; be respectful in chat; English in global; no spamming/ads. Breaking rules leads to penalties."
+        },
+        {
+          "question": "What is the punishment ladder?",
+          "answer": "Typically: warnings → mutes → temporary bans → permanent bans (depending on severity). Staff decisions are final."
+        }
+      ]
+    },
+    {
+      "title": "Economy & Store",
+      "questions": [
+        {
+          "question": "How do I earn money in-game?",
+          "answer": "Play the game modes, complete quests, do jobs, trade on the auction house, win KOTH/events, vote daily, and sell items. Many modes also have coin/coinshop loops."
+        },
+        {
+          "question": "What can I buy with real money?",
+          "answer": "Ranks, cosmetics, crates and other enhancements. Visit our site: https://www.indusrealms.com and the in-game store menus."
+        },
+        {
+          "question": "What are the rank prices?",
+          "answer": "Per month (₹): Knight — 80, Lord — 220, Paladin — 680, Duke — 999, King — 1600."
+        },
+        {
+          "question": "When will I receive my purchase?",
+          "answer": "Delivery is usually instant or within 5 minutes while you’re online. If it doesn’t arrive, rejoin the server, then contact support on Discord."
+        },
+        {
+          "question": "Are purchases refundable?",
+          "answer": "Generally no refunds. Exceptions may be considered for duplicate accidental purchases within a short window or clear payment errors. Chargebacks or fraud may lead to an account ban."
+        }
+      ]
+    },
+    {
+      "title": "Technical Support",
+      "questions": [
+        {
+          "question": "I’m having connection issues. What should I try?",
+          "answer": "Restart Minecraft/launcher/PC, confirm version 1.21.x (Java) or latest Bedrock, switch to mc.indusrealms.com, reboot router or use a different network, and try again. If problems persist, open a ticket on Discord."
+        },
+        {
+          "question": "The server feels laggy. Any fixes?",
+          "answer": "Lower render distance, disable heavy shaders, use performance mods (Java), close background apps and pick the closest region (we host in Mumbai). Persistent lag? Tell us on Discord with your ping and screenshots."
+        },
+        {
+          "question": "I lost items due to a bug. Can staff help?",
+          "answer": "Open a ticket on Discord with the time, location and screenshots/video. Staff will investigate and may restore items at their discretion."
+        },
+        {
+          "question": "How do I report hackers/cheaters?",
+          "answer": "Record evidence (video if possible) and open a ticket in our Discord support channel. Link: https://discord.com/channels/1426235491484700735/1429677491668390040"
+        }
+      ]
+    },
+    {
+      "title": "Community & Events",
+      "questions": [
+        {
+          "question": "Do you run events and competitions?",
+          "answer": "Yes — community events typically 1–2 times per month with prizes. Watch Discord announcements for dates."
+        },
+        {
+          "question": "Can I make a guild/team/clan?",
+          "answer": "Yes. Most modes support parties/teams or in-game groups. Use the mode’s help at spawn or ask staff on Discord for the exact commands."
+        },
+        {
+          "question": "How do I vote and what do I get?",
+          "answer": "Go to the Vote section on our website. Each vote gives a Vote Key — use it at the Vote Crate in spawn for rewards."
+        },
+        {
+          "question": "How do I apply for staff?",
+          "answer": "Staff applications open via Discord when recruitment is live. Check the announcements and follow the form/ticket instructions there."
+        },
+        {
+          "question": "Where can I share builds and screenshots?",
+          "answer": "Post in Discord general/media channels. Invite: https://discord.gg/SDBxkDJV69"
+        }
+      ]
+    }
+  ],
+  "stillHaveQuestions": {
+    "title": "Still Have Questions?",
+    "description": "Join our Discord and open a ticket — staff and community are ready to help: https://discord.gg/SDBxkDJV69"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "title": "VOTE FOR REWARDS",
+  "description": "Support our server by voting daily and earn amazing rewards including vote keys, diamonds, emeralds, and more!",
+  "voteSites": [
+    {
+      "name": "Minecraft-Server.net",
+      "reward": "Vote to receive 1x Vote Key + Support the server!",
+      "url": "https://minecraft-server.net/details/Indus_Realms/"
+    },
+    {
+      "name": "MinecraftServers.org",
+      "reward": "Earn rewards and help us climb the ranks!",
+      "url": "https://minecraftservers.org/server/679689"
+    },
+    {
+      "name": "TopG.org",
+      "reward": "Voting helps attract more players to Indus Realms!",
+      "url": "https://topg.org/minecraft-servers/server-676615"
+    },
+    {
+      "name": "Minecraft-MP.com",
+      "reward": "Support Indus Realms and earn your daily Vote Key!",
+      "url": "https://minecraft-mp.com/server-s349864"
+    },
+    {
+      "name": "Minecraftlist.org",
+      "reward": "Vote daily for epic perks and keys!",
+      "url": "https://minecraftlist.org/server/33918"
+    },
+    {
+      "name": "Minecraft.buzz",
+      "reward": "Keep the fire burning — get your reward!",
+      "url": "https://minecraft.buzz/vote/17194"
+    }
+  ],
+  "topVoters": {
+    "title": "Last Month's Top Voters",
+    "voters": [
+      {
+        "rank": 1,
+        "name": "DuckgamingVI",
+        "votes": 101,
+        "avatar": "https://minotar.net/helm/DuckgamingVI/150.png"
+      },
+      {
+        "rank": 2,
+        "name": "DuckgamingVI",
+        "votes": 92,
+        "avatar": "https://minotar.net/helm/DuckgamingVI/150.png"
+      },
+      {
+        "rank": 3,
+        "name": "DuckgamingVI",
+        "votes": 79,
+        "avatar": "https://minotar.net/helm/DuckgamingVI/150.png"
+      },
+      {
+        "rank": 4,
+        "name": "DuckgamingVI",
+        "votes": 74,
+        "avatar": "https://minotar.net/helm/DuckgamingVI/150.png"
+      },
+      {
+        "rank": 5,
+        "name": "DuckgamingVI",
+        "votes": 71,
+        "avatar": "https://minotar.net/helm/DuckgamingVI/150.png"
+      }
+    ]
+  },
+  "monthlyRewards": {
+    "title": "Monthly Rewards",
+    "rewards": [
+      "🥇 1st Place: $25 Store Credit + Exclusive Cosmetics",
+      "🥈 2nd Place: $15 Store Credit + Rare Items",
+      "🥉 3rd Place: $10 Store Credit + Vote Crates",
+      "🏆 Top 10: Special Recognition + Rewards"
+    ]
+  }
+}

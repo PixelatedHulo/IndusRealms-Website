@@ -1,0 +1,44 @@
+{
+  "brand": {
+    "name": "IIndus Realms",
+    "href": "/"
+  },
+  "navItems": [
+    {
+      "name": "Home",
+      "href": "/"
+    },
+    {
+      "name": "Rules",
+      "href": "/rules"
+    },
+    {
+      "name": "Store",
+      "href": "/store"
+    },
+    {
+      "name": "Staff",
+      "href": "/staff"
+    },
+    {
+      "name": "Vote",
+      "href": "/vote"
+    },
+    {
+      "name": "FAQ",
+      "href": "/faq"
+    },
+    {
+      "name": "Blog",
+      "href": "/blog"
+    },
+    {
+      "name": "Discord",
+      "href": "/discord"
+    }
+  ],
+  "mobileMenu": {
+    "openLabel": "Open menu",
+    "closeLabel": "Close menu"
+  }
+}

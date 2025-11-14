@@ -1,0 +1,57 @@
+{
+  "title": "SERVER RULES",
+  "description": "Please read and follow our server rules carefully. These guidelines help maintain a friendly and enjoyable environment for all players.",
+  "categories": [
+    {
+      "title": "General Rules",
+      "rules": [
+        "Be respectful to all players and staff members",
+        "No harassment, bullying, or discrimination of any kind",
+        "English only in global chat (other languages in private)",
+        "No advertising of other servers or websites",
+        "No spamming chat, commands, or actions",
+        "Follow staff instructions at all times",
+        "Keep chat conversations appropriate at all times"
+      ]
+    },
+    {
+      "title": "Gameplay Rules",
+      "rules": [
+        "No cheating, hacking, or using modified clients for unfair advantages",
+        "No exploiting bugs or glitches - report them instead",
+        "No griefing or destroying other players builds",
+        "No stealing from other players",
+        "No intentional lagging or crashing of the server",
+        "PvP rules depend on the specific area or game mode",
+        "Respect claim boundaries and protected areas"
+      ]
+    },
+    {
+      "title": "Chat Rules",
+      "rules": [
+        "No swearing or inappropriate language",
+        "No discussing politics or religious topics",
+        "No sharing personal information in public chat",
+        "No excessive use of caps or special characters",
+        "No spamming or flooding the chat",
+        "Report rule breakers to staff rather than confronting them",
+        "Keep conversations relevant to the server"
+      ]
+    },
+    {
+      "title": "Punishments",
+      "rules": [
+        "First offense: temporary mute/ban depending on severity",
+        "Second offense: temporary ban with longer duration",
+        "Severe violations may result in immediate permanent ban",
+        "Staff have final say in all punishment decisions",
+        "Appeals can be made through our Discord server",
+        "Evading punishments will result in extended penalties"
+      ]
+    }
+  ],
+  "notice": {
+    "title": "Important Notice",
+    "content": "Breaking any of these rules may result in punishment including mutes, kicks, temporary bans, or permanent bans depending on the severity. Staff decisions are final, but appeals can be made through our Discord server."
+  }
+}

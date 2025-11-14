@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "title": {
+      "line1": "Welcome to",
+      "line2": "Indus Realms"
+    },
+    "description": "Dive into the ultimate Minecraft adventure, featuring unique custom content, a vibrant community, and limitless opportunities to explore and create.",
+    "buttonText": "Start Playing Now",
+    "serverIP": "150.230.237.207:2016"
+  },
+  "stats": [
+    {
+      "title": "1+",
+      "description": "Active Players",
+      "icon": "faUsers"
+    },
+    {
+      "title": "Online",
+      "description": "Status",
+      "icon": "faServer"
+    },
+    {
+      "title": "Minecraft 1.21.8",
+      "description": "Version",
+      "icon": "faCube"
+    }
+  ],
+  "features": [
+    {
+      "title": "Custom Plugins",
+      "description": "Unique gameplay mechanics and features you won't find anywhere else.",
+      "icon": "faBolt"
+    },
+    {
+      "title": "Active Community",
+      "description": "Join thousands of players in our vibrant and welcoming community.",
+      "icon": "faUsers"
+    },
+    {
+      "title": "Regular Events",
+      "description": "Participate in exciting events and competitions with amazing rewards.",
+      "icon": "faCalendar"
+    },
+    {
+      "title": "Custom Ranks",
+      "description": "Unlock exclusive perks and abilities as you progress through our rank system.",
+      "icon": "faCrown"
+    },
+    {
+      "title": "24/7 Support",
+      "description": "Our dedicated staff team is always here to help you with any issues.",
+      "icon": "faHeadset"
+    },
+    {
+      "title": "Anti-Grief Protection",
+      "description": "Advanced protection systems keep your builds safe from griefers.",
+      "icon": "faShield"
+    }
+  ]
+}

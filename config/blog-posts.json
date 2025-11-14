@@ -1,0 +1,59 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Server Update 2.5 - New Features and Bug Fixes",
+      "slug": "server-update-2-5",
+      "excerpt": "We're excited to announce our latest server update with new features, improvements, and bug fixes that will enhance your gaming experience.",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      "image": "/images/blog-placeholder.png",
+      "date": "2025-01-02",
+      "author": "Iceyy4400",
+      "tags": ["update", "features", "bugfix"]
+    },
+    {
+      "id": 2,
+      "title": "Holiday Event 2024 - Winter Wonderland",
+      "slug": "holiday-event-2024",
+      "excerpt": "Join us for our special holiday event featuring exclusive rewards, festive decorations, and limited-time challenges!",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nNemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+      "image": "/images/blog-placeholder.png",
+      "date": "2024-12-20",
+      "author": "DuckgamingVI",
+      "tags": ["event", "holiday", "rewards"]
+    },
+    {
+      "id": 3,
+      "title": "New PvP Arena Now Open",
+      "slug": "new-pvp-arena-open",
+      "excerpt": "Test your skills in our brand new PvP arena with custom game modes and weekly tournaments with amazing prizes.",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+      "image": "/images/blog-placeholder.png",
+      "date": "2024-12-15",
+      "author": "Iceyy4400",
+      "tags": ["pvp", "arena", "tournament"]
+    },
+    {
+      "id": 4,
+      "title": "Community Build Contest Winners",
+      "slug": "build-contest-winners",
+      "excerpt": "Congratulations to all participants in our community build contest! Check out the amazing winning creations.",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nTemporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.",
+      "image": "/images/blog-placeholder.png",
+      "date": "2024-12-10",
+      "author": "DuckgamingVI",
+      "tags": ["contest", "builds", "community"]
+    },
+    {
+      "id": 5,
+      "title": "Server Performance Improvements",
+      "slug": "server-performance-improvements",
+      "excerpt": "We've implemented several performance optimizations to reduce lag and improve overall server stability.",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nItaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+      "image": "/images/blog-placeholder.png",
+      "date": "2024-12-05",
+      "author": "Iceyy4400",
+      "tags": ["performance", "optimization", "technical"]
+    }
+  ]
+}

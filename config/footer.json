@@ -1,0 +1,36 @@
+{
+  "socialLinks": [
+    {
+      "name": "Discord",
+      "url": "https://discord.gg/argonix",
+      "icon": "faDiscord"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://argonix.eu",
+      "icon": "faTwitter"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://argonix.eu",
+      "icon": "faYoutube"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://argonix.eu",
+      "icon": "faInstagram"
+    }
+  ],
+  "copyright": {
+    "year": "2025",
+    "text": "Minecraft server using the Fire Web Template. All rights reserved.",
+    "disclaimer": "We are not associated with Microsoft or Mojang Studios in any way."
+  },
+  "credits": {
+    "madeBy": "Iceyy",
+    "withLove": "love",
+    "withCoffee": "coffee",
+    "loveEmoji": "♥️",
+    "coffeeEmoji": "☕"
+  }
+}

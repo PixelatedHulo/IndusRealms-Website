@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* === Indus Realms Brand Colors === */
+    --brand-yellow: #ffd24d;   /* golden glow */
+    --brand-orange: #ff9900;   /* warm orange */
+    --brand-amber: #ffb84d;    /* mid gold highlight */
+    --brand-deep:   #1a0800;   /* deep brown-black base */
+    --brand-surface:#120600;   /* darker surface */
+
+    /* === Tailwind Tokens (HSL form) === */
+    --background: 28 50% 5%;         /* dark warm base */
+    --foreground: 0 0% 98%;
+
+    --card: 28 40% 7%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 28 40% 7%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 38 100% 52%;          /* orange-gold */
+    --primary-foreground: 25 100% 10%;
+
+    --secondary: 28 40% 10%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 28 40% 10%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 28 40% 10%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 70% 38%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 28 40% 10%;
+    --input: 28 40% 10%;
+    --ring: 38 100% 52%;
+
+    --chart-1: 40 100% 56%;
+    --chart-2: 32 100% 55%;
+    --chart-3: 12 76% 61%;
+    --chart-4: 44 90% 62%;
+    --chart-5: 28 58% 40%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+
+  body {
+    @apply bg-background text-foreground;
+    background:
+      radial-gradient(60% 80% at 10% 15%, rgba(255,200,60,0.15), transparent 60%),
+      radial-gradient(70% 80% at 90% 85%, rgba(255,153,0,0.12), transparent 60%),
+      linear-gradient(180deg, #1a0800 0%, #120600 70%);
+    background-attachment: fixed;
+  }
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #1a0800; }
+::-webkit-scrollbar-thumb { background: #ff9900; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #e68300; }
+
+/* === Smooth transition === */
+* { transition: all 0.2s ease-in-out; }
+
+/* === Gradient Text (Title) === */
+.text-gradient {
+  background: linear-gradient(135deg, var(--brand-yellow), var(--brand-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+
+/* === Brand Surface Background === */
+.bg-brand-surface {
+  background: linear-gradient(180deg, rgba(255,200,60,0.03), rgba(0,0,0,0.2));
+  border: 1px solid rgba(255,153,0,0.18);
+  box-shadow: 0 10px 28px rgba(255,153,0,0.12);
+}
+
+/* === Hero Background === */
+.bg-brand-hero {
+  position: relative;
+  background:
+    radial-gradient(55% 70% at 15% 20%, rgba(255,210,77,0.12), transparent 60%),
+    radial-gradient(60% 70% at 85% 80%, rgba(255,153,0,0.10), transparent 60%),
+    linear-gradient(180deg, #1a0800 0%, #120600 70%);
+}
+
+/* Anti-banding overlay */
+.bg-brand-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(1200px 300px at 50% 100%, rgba(0,0,0,0.03), transparent 60%);
+  z-index: 0;
+}
+
+/* === Footer Shadow Blend === */
+.footer-blend-shadow {
+  position: relative;
+  z-index: 0;
+}
+.footer-blend-shadow::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 8, 0, 0) 0%,
+    rgba(26, 8, 0, 0.35) 40%,
+    rgba(18, 6, 0, 0.6) 100%
+  );
+  filter: blur(10px);
+  z-index: 1;
+}
+
+/* === Page Bottom Fade (for home blend) === */
+.page-fade-bottom { position: relative; }
+.page-fade-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 8, 0, 0) 0%,
+    rgba(26, 8, 0, 0.28) 45%,
+    rgba(18, 6, 0, 0.55) 100%
+  );
+  filter: blur(10px);
+  z-index: 0;
+}
+
+/* === Button === */
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-yellow), var(--brand-orange));
+  color: #1a0a00;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 30px rgba(255,153,0,0.3);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 35px rgba(255,153,0,0.45);
+}
+
+/* === Card Glow === */
+.card-brand {
+  background: rgba(255,153,0,0.05);
+  border: 1px solid rgba(255,153,0,0.2);
+  box-shadow: 0 0 20px rgba(255,153,0,0.05);
+}
+.card-brand:hover {
+  background: rgba(255,153,0,0.08);
+  border-color: rgba(255,153,0,0.35);
+  box-shadow: 0 0 30px rgba(255,153,0,0.15);
+}
+
+/* === Glow Animation === */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+.bg-animated-fire::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,153,0,0.08), transparent 60%);
+  animation: glowPulse 5s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* === Floating / 3D Helpers for Store Cards === */
+
+@keyframes ir-float-soft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px); /* thoda subtle */
+  }
+}
+
+.ir-float-soft {
+  animation: ir-float-soft 6s ease-in-out infinite; /* 3s → 6s, zyada smooth */
+  will-change: transform;
+}
+
+.ir-tilt-hover {
+  transform-style: preserve-3d;
+  transition: transform 280ms ease;
+}
+
+.ir-tilt-hover:hover {
+  transform: translateY(-6px) rotateX(3deg) rotateY(-2deg);
+}
+
+/* Reduced motion users ke liye animation soft kar do */
+@media (prefers-reduced-motion: reduce) {
+  .ir-float-soft {
+    animation: none;
+    transform: none;
+  }
+  .ir-tilt-hover,
+  .ir-tilt-hover:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* === Responsive Tweaks === */
+@media (max-width: 640px) {
+  .container { padding: 0 1rem; }
+}
+@media (max-width: 768px) {
+  .fixed.inset-0 { padding: 1rem; }
+}

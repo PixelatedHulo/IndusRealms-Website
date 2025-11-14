@@ -1,0 +1,53 @@
+{
+  "title": "JOIN OUR DISCORD",
+  "description": "Connect with our amazing community, get support, participate in events, and stay updated with the latest server news and announcements.",
+  "joinButton": {
+    "text": "Join Discord Server",
+    "url": "https://discord.gg/argonix"
+  },
+  "features": [
+    {
+      "title": "Active Community",
+      "description": "Join over 5,000 active members in our Discord community. Make friends, find teammates, and share your Minecraft adventures.",
+      "icon": "faUsers"
+    },
+    {
+      "title": "24/7 Support",
+      "description": "Get help from our dedicated staff team anytime. Whether you need technical support or have questions about gameplay, we're here to help.",
+      "icon": "faComments"
+    },
+    {
+      "title": "Server Updates",
+      "description": "Stay informed about server maintenance, new features, events, and important announcements through our dedicated channels.",
+      "icon": "faShield"
+    },
+    {
+      "title": "Events & Giveaways",
+      "description": "Participate in regular events, competitions, and giveaways. Win exclusive prizes, ranks, and in-game items.",
+      "icon": "faGift"
+    }
+  ],
+  "discordFeatures": {
+    "title": "Discord Features",
+    "sections": [
+      {
+        "title": "General Channels",
+        "features": [
+          "• General chat and discussions",
+          "• Server announcements",
+          "• Screenshots and builds showcase",
+          "• Memes and off-topic chat"
+        ]
+      },
+      {
+        "title": "Support & Info",
+        "features": [
+          "• Ticket system for support",
+          "• Server rules and guidelines",
+          "• FAQ and help resources",
+          "• Staff applications"
+        ]
+      }
+    ]
+  }
+}

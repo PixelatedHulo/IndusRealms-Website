@@ -1,0 +1,26 @@
+{
+  "name": "Fire Web Template by Iceyy4400",
+  "short_name": "Fire Template",
+  "description": "A modern, responsive Minecraft server website template featuring a stunning fire theme.",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#dc2626",
+  "background_color": "#000000",
+  "display": "standalone",
+  "start_url": "/"
+}
