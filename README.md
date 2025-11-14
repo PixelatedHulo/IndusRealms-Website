@@ -1,8 +1,14 @@
-⭐ Features
+Indus Realms – Official Website
 
-Fully Responsive — Works on all devices
+Official website for Indus Realms, an Indian Minecraft Server Network.
 
-Modern Dark UI
+Built using TypeScript, Next.js, React, and Tailwind CSS.
+
+✨ Features
+
+Responsive Design — Works on all screen sizes
+
+Modern Dark Theme
 
 Live Player Count
 
@@ -10,42 +16,49 @@ Staff Page
 
 FAQ Page
 
-Blog / News Page
+Blog / Updates Page
 
 Rules Page
 
-Vote Page (manual leaderboard + external links)
+Vote Page (manual leaderboard + vote site links)
 
-Store Page (redirect or optional backend integration)
+Store Page (redirect to external shop)
 
-Discord Page
+Discord Info Page
 
-Fully Configurable Text & Links
+Fully Editable Content — All text & links configurable
 
-Editable CSS via globals.css + component styles
+Customizable Styling via globals.css + component CSS
 
-📦 Tech Stack
-
-TypeScript
+🛠 Tech Stack
 
 Next.js
 
 React
 
+TypeScript
+
 Tailwind CSS
 
-🚀 Getting Started
+🚀 Setup
 git clone https://github.com/<your-org>/<your-repo>.git
 cd <your-repo>
 
 npm install
 npm run dev
-# open http://localhost:3000
 
-Production Build
+
+Visit:
+http://localhost:3000
+
+Production
 npm run build
 npm start
 
-🌐 Live Version
+🌐 Live Site
 
 https://indusrealms.com
+
+📄 License
+
+MIT
