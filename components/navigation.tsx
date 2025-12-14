@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import navigationConfig from "@/config/navigation.json";
+import { supabase } from "@/lib/supabaseClient";
 
 /** Remove query/hash and trailing slash (except root) */
 const clean = (p: string) => {
@@ -13,6 +14,7 @@ const clean = (p: string) => {
   if (noQ === "/") return "/";
   return noQ.replace(/\/+$/, "");
 };
+
 const isExternal = (href: string) => /^https?:\/\//i.test(href);
 
 /** Active if exact match OR current path starts with href + "/" (for nested routes) */
@@ -26,7 +28,14 @@ const isActivePath = (pathname: string, href: string) => {
 
 export function Navigation() {
   const pathname = usePathname() || "/";
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(false);
+
+  // auth state
+  const [authReady, setAuthReady] = useState(false);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   const toggleMenu = () => setIsOpen((v) => !v);
   const closeMenu = () => setIsOpen(false);
@@ -44,6 +53,76 @@ export function Navigation() {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
+
+  // 🔐 Supabase auth + profile (username + avatar)
+  useEffect(() => {
+    const loadUserData = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (!session?.user) {
+        setUserName(null);
+        setAvatarUrl(null);
+        setAuthReady(true);
+        return;
+      }
+
+      const u = session.user;
+
+      const username =
+        (u.user_metadata?.username as string | undefined) ||
+        u.email?.split("@")[0] ||
+        "Player";
+      setUserName(username);
+
+      // avatar_url from profiles table
+      const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("avatar_url")
+        .eq("id", u.id)
+        .single();
+
+      if (!error && profile?.avatar_url) {
+        setAvatarUrl(profile.avatar_url);
+      } else {
+        // fallback default avatar
+        setAvatarUrl("/images/mc-avatar.png");
+      }
+
+      setAuthReady(true);
+    };
+
+    loadUserData();
+
+    // auth change → reload profile
+    const { data } = supabase.auth.onAuthStateChange(() => {
+      loadUserData();
+    });
+
+    // optional: profile page se custom event aayega to bhi reload
+    const onProfileUpdated = () => {
+      loadUserData();
+    };
+    window.addEventListener("profile-updated", onProfileUpdated);
+
+    return () => {
+      data.subscription.unsubscribe();
+      window.removeEventListener("profile-updated", onProfileUpdated);
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUserName(null);
+    setAvatarUrl(null);
+    router.push("/");
+  };
+
+  const loginActive = isActivePath(pathname, "/login");
+  const registerActive = isActivePath(pathname, "/register");
+
+  const avatarSrc = avatarUrl || "/images/mc-avatar.png";
 
   return (
     <nav
@@ -85,11 +164,12 @@ export function Navigation() {
 
           {/* === Desktop Navigation === */}
           <div className="hidden md:block">
-            <div className="ml-8 flex items-center gap-2 lg:gap-3">
+            <div className="ml-8 flex items-center gap-3 lg:gap-4">
               {navigationConfig.navItems.map((item) => {
                 const active = isActivePath(pathname, item.href);
                 const commonClasses =
                   "relative px-4 py-2 rounded-md text-[15px] font-semibold transition-all duration-300";
+
                 if (isExternal(item.href)) {
                   return (
                     <a
@@ -106,6 +186,7 @@ export function Navigation() {
                     </a>
                   );
                 }
+
                 return (
                   <Link
                     key={item.name}
@@ -123,6 +204,84 @@ export function Navigation() {
                   </Link>
                 );
               })}
+
+              {/* === Desktop Auth / User Area === */}
+              {authReady && (
+                <div className="ml-3 flex items-center gap-2">
+                  {userName ? (
+                    <>
+                      {/* logged-in chip with avatar – click → /account */}
+                      <div
+                        onClick={() => router.push("/account")}
+                        className="
+                          flex items-center px-3 py-1.5 rounded-full
+                          bg-black/40 border border-[#ffb84d]/40
+                          text-xs text-[#ffe6b5]
+                          shadow-[0_0_10px_rgba(0,0,0,0.7)]
+                          cursor-pointer hover:bg-black/60 transition-colors
+                        "
+                      >
+                        <div className="relative h-7 w-7 mr-2">
+                          <img
+                            src={avatarSrc}
+                            alt="Player avatar"
+                            className="h-7 w-7 rounded-full border border-[#ffcc66]/80 object-cover"
+                          />
+                          <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 border border-[#1a0800]" />
+                        </div>
+                        <span className="font-semibold truncate max-w-[130px]">
+                          {userName}
+                        </span>
+                      </div>
+
+                      <button
+                        onClick={handleLogout}
+                        className="
+                          inline-flex items-center rounded-full
+                          px-4 py-2.5 text-sm font-semibold
+                          border border-[#ffb84d]/40
+                          bg-black/40 text-[#ffe6b5]
+                          shadow-[0_0_10px_rgba(0,0,0,0.7)]
+                          hover:border-[#ffd887]
+                          hover:bg-black/60
+                          hover:shadow-[0_0_14px_rgba(255,184,77,0.55)]
+                          transition-all duration-300
+                        "
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link href="/login">
+                        <button
+                          className={cn(
+                            "inline-flex items-center rounded-full px-4 py-2.5 text-sm font-semibold transition-all duration-300 border",
+                            loginActive
+                              ? "border-transparent bg-gradient-to-r from-[#ffb84d] to-[#ff9900] text-[#1a0800] shadow-[0_0_16px_rgba(255,174,77,0.75)]"
+                              : "border-[#ffb84d]/40 bg-black/40 text-[#ffe6b5] shadow-[0_0_10px_rgba(0,0,0,0.7)] hover:border-[#ffd887] hover:bg-black/60 hover:shadow-[0_0_14px_rgba(255,184,77,0.55)]"
+                          )}
+                        >
+                          Login
+                        </button>
+                      </Link>
+
+                      <Link href="/register">
+                        <button
+                          className={cn(
+                            "inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 border",
+                            registerActive
+                              ? "border-transparent bg-gradient-to-r from-[#ffb84d] to-[#ff9900] text-[#1a0800] shadow-[0_0_16px_rgba(255,174,77,0.75)]"
+                              : "border-[#ffb84d]/40 bg-black/40 text-[#ffe6b5] shadow-[0_0_10px_rgba(0,0,0,0.7)] hover:border-[#ffd887] hover:bg-black/60 hover:shadow-[0_0_14px_rgba(255,184,77,0.55)]"
+                          )}
+                        >
+                          Register
+                        </button>
+                      </Link>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
@@ -131,7 +290,9 @@ export function Navigation() {
             onClick={toggleMenu}
             className="md:hidden p-2 text-gray-200 hover:text-[#ffcc66] transition-all duration-300"
             aria-label={
-              isOpen ? navigationConfig.mobileMenu.closeLabel : navigationConfig.mobileMenu.openLabel
+              isOpen
+                ? navigationConfig.mobileMenu.closeLabel
+                : navigationConfig.mobileMenu.openLabel
             }
           >
             <svg
@@ -196,6 +357,78 @@ export function Navigation() {
                 </Link>
               );
             })}
+
+            {/* === Mobile Auth / User === */}
+            {authReady && (
+              <div className="mt-4 border-t border-[#ffb84d]/30 pt-4 flex flex-col gap-3">
+                {userName ? (
+                  <>
+                    <div
+                      onClick={() => {
+                        closeMenu();
+                        router.push("/account");
+                      }}
+                      className="flex items-center gap-3 text-sm text-[#ffe6b5] mb-1 cursor-pointer hover:bg-black/40 rounded-2xl px-2 py-2 transition-colors"
+                    >
+                      <div className="relative h-9 w-9">
+                        <img
+                          src={avatarSrc}
+                          alt="Player avatar"
+                          className="h-9 w-9 rounded-full border border-[#ffcc66]/80 object-cover"
+                        />
+                        <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 border border-[#1a0800]" />
+                      </div>
+                      <div>
+                        <div className="text-[0.8rem] text-gray-300">
+                          Logged in as
+                        </div>
+                        <div className="font-semibold text-[#ffcc66]">
+                          {userName}
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        closeMenu();
+                        handleLogout();
+                      }}
+                      className="w-full rounded-full border border-[#ffb84d]/60 bg-black/40 px-5 py-2.5 text-base font-semibold text-[#ffe6b5] shadow-[0_0_12px_rgba(0,0,0,0.75)] hover:border-[#ffd887] hover:bg-black/60 hover:shadow-[0_0_16px_rgba(255,184,77,0.6)] transition-all"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/login" onClick={closeMenu}>
+                      <button
+                        className={cn(
+                          "w-full rounded-full px-5 py-2.5 text-base font-semibold transition-all duration-300",
+                          loginActive
+                            ? "bg-gradient-to-r from-[#ffb84d] to-[#ff9900] text-[#1a0800] shadow-[0_0_18px_rgba(255,174,77,0.85)]"
+                            : "border border-[#ffb84d]/60 bg-black/40 text-[#ffe6b5] shadow-[0_0_12px_rgba(0,0,0,0.75)] hover:border-[#ffd887] hover:bg-black/60 hover:shadow-[0_0_16px_rgba(255,184,77,0.6)]"
+                        )}
+                      >
+                        Login
+                      </button>
+                    </Link>
+
+                    <Link href="/register" onClick={closeMenu}>
+                      <button
+                        className={cn(
+                          "w-full rounded-full px-5 py-3 text-base font-semibold transition-all duration-300 flex items-center justify-center gap-2",
+                          registerActive
+                            ? "bg-gradient-to-r from-[#ffb84d] to-[#ff9900] text-[#1a0800] shadow-[0_0_18px_rgba(255,174,77,0.85)]"
+                            : "border border-[#ffb84d]/60 bg-black/40 text-[#ffe6b5] shadow-[0_0_12px_rgba(0,0,0,0.75)] hover:border-[#ffd887] hover:bg-black/60 hover:shadow-[0_0_16px_rgba(255,184,77,0.6)]"
+                        )}
+                      >
+                        <span>Register</span>
+                      </button>
+                    </Link>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}

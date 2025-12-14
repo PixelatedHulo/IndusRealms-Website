@@ -1,4 +1,3 @@
-// components/footer.tsx
 "use client";
 
 import { useState } from "react";
@@ -18,10 +17,10 @@ const MC_ADDRESS = "mc.indusrealms.com";
 const SERVER_IP_DISPLAY = "150.230.237.207:2016";
 
 const SOCIALS = [
-  { label: "Discord", href: "https://discord.gg/yourinvite", icon: faDiscord },
-  { label: "Twitter", href: "https://twitter.com/yourhandle", icon: faTwitter },
-  { label: "YouTube", href: "https://youtube.com/@yourchannel", icon: faYoutube },
-  { label: "Instagram", href: "https://instagram.com/yourhandle", icon: faInstagram },
+  { label: "Discord", href: "https://discord.gg/SDBxkDJV69", icon: faDiscord },
+  { label: "Twitter", href: "https://x.com/Indus_Realms?t=rWBMaufVXItWZGMwgz_6Qw&s=09", icon: faTwitter },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UCOvQjDntN27KRPVhKX4lcPA", icon: faYoutube },
+  { label: "Instagram", href: "https://www.instagram.com/indusrealms?igsh=ZG4weXpkbHU3azRh", icon: faInstagram },
 ];
 
 export function Footer() {
@@ -53,16 +52,14 @@ export function Footer() {
       <div className="pointer-events-none absolute -top-6 left-1/2 h-24 w-[60%] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-2xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {/* === TOP ROW (original layout restored) === */}
+        {/* === TOP ROW === */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Left: Brand */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <h2 className="text-xl font-bold text-white">
               {SERVER_NAME} <span className="text-gradient">Network</span>
             </h2>
           </div>
 
-          {/* Right: Join button + Socials */}
           <div className="flex flex-col items-center md:items-end gap-4">
             <button
               onClick={copyIp}
@@ -93,25 +90,26 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Divider line */}
+        {/* Divider */}
         <div className="border-t border-white/10 my-8 w-full" />
 
-        {/* === BOTTOM (centered copyright) === */}
+        {/* === BOTTOM LEGAL AREA === */}
         <div className="text-sm text-gray-400 text-center space-y-2">
           <p>© {YEAR} {SERVER_NAME}. All rights reserved.</p>
           <p>Not affiliated with Mojang or Microsoft.</p>
+
+          <p className="space-x-4">
+            <Link href="/refund" className="underline hover:text-white">Refund Policy</Link>
+            <Link href="/privacy" className="underline hover:text-white">Privacy</Link>
+            <Link href="/terms" className="underline hover:text-white">Terms & Conditions</Link>
+            <Link href="/shipping" className="underline hover:text-white">Shipping Policy</Link>
+            <Link href="/contact" className="underline hover:text-white">Contact Us</Link>
+          </p>
+
           <p>
             Built with <span className="text-amber-400 font-semibold">fire</span>,{" "}
             <span className="text-pink-300 font-semibold">heart</span> ❤️ and{" "}
-            <span className="text-amber-300 font-semibold">coffee</span> ☕.{" "}
-            <Link href="/privacy" className="underline hover:text-white">
-              Privacy
-            </Link>{" "}
-            &{" "}
-            <Link href="/terms" className="underline hover:text-white">
-              Terms
-            </Link>
-            .
+            <span className="text-amber-300 font-semibold">coffee</span> ☕.
           </p>
         </div>
       </div>

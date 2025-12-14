@@ -55,11 +55,11 @@ function animateOpacity(
 
 export default function ThunderBehindClouds({
   intervalMs = 15000, // ⬅️ longer cadence
-  peak1 = 0.42,       // a bit stronger pre-flash
-  peak2 = 0.80,       // brighter main flash
+  peak1 = 0.42, // a bit stronger pre-flash
+  peak2 = 0.80, // brighter main flash
   decay1Ms = 160,
   interFlashGapMs = 130,
-  decay2Ms = 1000,    // fast fade to mid
+  decay2Ms = 1000, // fast fade to mid
   afterglowMin = 0.18, // subtle warm haze that lingers
   afterglowMs = 2000, // very slow tail
   thunderDelayMs = 420,
@@ -156,10 +156,14 @@ export default function ThunderBehindClouds({
         clearersRef.current.push(animateOpacity(f, 0, peak2, 110));
         // fade down to warm afterglow
         const t3 = window.setTimeout(() => {
-          clearersRef.current.push(animateOpacity(f, peak2, afterglowMin, decay2Ms));
+          clearersRef.current.push(
+            animateOpacity(f, peak2, afterglowMin, decay2Ms)
+          );
           // and finally the long tail to 0
           const t4 = window.setTimeout(() => {
-            clearersRef.current.push(animateOpacity(f, afterglowMin, 0, afterglowMs));
+            clearersRef.current.push(
+              animateOpacity(f, afterglowMin, 0, afterglowMs)
+            );
             // stop video near end of tail
             const t5 = window.setTimeout(() => {
               v.pause();
@@ -191,8 +195,10 @@ export default function ThunderBehindClouds({
     intervalRef.current = window.setInterval(strike, intervalMs);
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key.toLowerCase() === "t") strike();
+      const key = (e.key || "").toLowerCase();
+      if (key === "t") strike();
     };
+
     window.addEventListener("keydown", onKey);
 
     return () => {
@@ -243,18 +249,14 @@ export default function ThunderBehindClouds({
         style={{
           opacity: 0,
           mixBlendMode: "screen",
-          // much larger, layered gradients for wide-area glow
           background: [
-            // small white core near top-center
             "radial-gradient(720px 520px at 52% 8%, rgba(255,255,255,0.92), transparent 60%)",
-            // large warm bloom across upper third
             "radial-gradient(1500px 1000px at 50% 6%, rgba(255,220,150,0.88), transparent 72%)",
-            // secondary warm spread to left
             "radial-gradient(1400px 950px at 35% 12%, rgba(255,190,90,0.55), transparent 75%)",
-            // subtle blanket to right
             "radial-gradient(1600px 1100px at 70% 10%, rgba(255,170,60,0.35), transparent 78%)",
           ].join(","),
-          filter: "contrast(1.25) brightness(1.32) saturate(1.18)",
+          filter:
+            "contrast(1.25) brightness(1.32) saturate(1.18)",
           transition: "opacity 0.12s linear",
         }}
       />

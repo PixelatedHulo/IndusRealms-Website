@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,21 +29,59 @@ const iconMap = {
   faFistRaised,
 };
 
-export default function StoreCategoryPage({
-  params,
-}: {
-  params: { category: string };
-}) {
+// Sirf in do categories ko allow karna
+type AllowedCategory = "ranks" | "coins";
+
+// nav order + meta (sirf Ranks & Coins)
+const navCategories: { id: AllowedCategory; label: string; icon: any }[] = [
+  { id: "ranks", label: "Ranks", icon: faStar },
+  { id: "coins", label: "Coins", icon: faBox },
+];
+
+export default function StoreCategoryPage() {
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
 
-  // Simple direct access – yahi pehle kaam kar raha tha
-  const category = params.category;
-  const typedCategory = category as keyof typeof storeConfig.categories;
+  // ✅ New Next.js style – params hook use karo, props nahi
+  const params = useParams<{ category?: string }>();
 
-  const categoryData = storeConfig.categories[typedCategory];
+  // param string le lo, nahi mila to "ranks"
+  const rawCategory = (params?.category as string | undefined) ?? "ranks";
+
+  // sirf ranks/coins ko allow karo, warna fallback ranks
+  const category: AllowedCategory = ["ranks", "coins"].includes(rawCategory)
+    ? (rawCategory as AllowedCategory)
+    : "ranks";
+
+  const categoryData =
+    storeConfig.categories[
+      category as keyof typeof storeConfig.categories
+    ];
   const items = categoryData?.items || [];
 
-  if (!categoryData) return <div>Category not found</div>;
+  if (!categoryData) {
+    return (
+      <div className="min-h-screen bg-shifting-ember py-16 sm:py-20 text-[var(--ir-text)] flex items-center justify-center">
+        <div className="ir-card px-6 py-4 text-center max-w-md">
+          <h2 className="text-2xl font-bold mb-2 text-[var(--ir-amber)]">
+            Category not found
+          </h2>
+          <p className="text-[var(--ir-dim)] mb-4">
+            This store category doesn’t exist. Please choose a valid one.
+          </p>
+          <div className="flex gap-3 justify-center">
+            <Link href="/store/ranks">
+              <Button className="ir-btn">View Ranks</Button>
+            </Link>
+            <Link href="/store/coins">
+              <Button variant="outline" className="border-[rgba(255,174,45,.45)]">
+                View Coins
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-shifting-ember py-16 sm:py-20 text-[var(--ir-text)]">
@@ -56,26 +95,40 @@ export default function StoreCategoryPage({
             {storeConfig.description.replace("{category}", category)}
           </p>
 
-          {/* Category Navigation */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12">
-            {Object.keys(storeConfig.categories).map((cat) => {
-              const active = cat === category;
-              return (
-                <Link key={cat} href={`/store/${cat}`}>
-                  <Button
-                    size="sm"
-                    className={
-                      active
-                        ? "bg-gradient-to-b from-[#ffae2d] to-[#ff6a00] text-[#1a0f0b] font-bold shadow-[0_0_18px_rgba(255,180,60,.25)]"
-                        : "bg-[rgba(26,16,11,.45)] border border-[rgba(255,174,45,.25)] text-[var(--ir-dim)] hover:bg-[rgba(26,16,11,.6)]"
-                    }
-                    variant={active ? "default" : "outline"}
-                  >
-                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                  </Button>
-                </Link>
-              );
-            })}
+          {/* Category Navigation – fancy 2-tab pill (Ranks / Coins) */}
+          <div className="flex justify-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-3 bg-[rgba(10,6,3,0.9)] border border-[rgba(255,174,45,0.35)] rounded-full px-3 py-3 shadow-[0_0_40px_rgba(0,0,0,0.75)] backdrop-blur-sm">
+              {navCategories.map(({ id, label, icon }) => {
+                if (!storeConfig.categories[id]) return null;
+                const active = id === category;
+
+                return (
+                  <Link key={id} href={`/store/${id}`}>
+                    <Button
+                      size="lg"
+                      variant="ghost"
+                      className={
+                        "rounded-full px-7 py-3 text-base font-semibold flex items-center gap-3 transition-all duration-200 " +
+                        (active
+                          ? "bg-gradient-to-r from-[#ffb347] to-[#ff8400] text-[#1a0f0b] shadow-[0_0_22px_rgba(255,180,60,0.65)] scale-[1.06]"
+                          : "bg-transparent text-[var(--ir-dim)] hover:bg-[rgba(255,174,45,0.14)] hover:text-[#ffd38a]")
+                      }
+                    >
+                      <FontAwesomeIcon
+                        icon={icon}
+                        className={
+                          "w-5 h-5 " +
+                          (active
+                            ? "text-[#1a0f0b]"
+                            : "text-[rgba(255,210,140,0.95)]")
+                        }
+                      />
+                      <span>{label}</span>
+                    </Button>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -99,7 +152,9 @@ export default function StoreCategoryPage({
                           <FontAwesomeIcon
                             icon={IconComponent as any}
                             className={`w-12 h-12 sm:w-14 sm:h-14 ${
-                              isKing ? "text-[#ffd84a]" : "text-[var(--ir-amber)]"
+                              isKing
+                                ? "text-[#ffd84a]"
+                                : "text-[var(--ir-amber)]"
                             } drop-shadow-[0_0_16px_rgba(255,220,120,0.55)]`}
                           />
                         ) : (
@@ -241,12 +296,16 @@ export default function StoreCategoryPage({
                   Perks
                 </h4>
                 <ul className="space-y-1 max-h-60 overflow-y-auto pr-2 text-sm">
-                  {selectedItem.features.map((feature: string, i: number) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="mt-[2px] text-[var(--ir-amber)]">◆</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
+                  {selectedItem.features.map(
+                    (feature: string, i: number) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="mt-[2px] text-[var(--ir-amber)]">
+                          ◆
+                        </span>
+                        <span>{feature}</span>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
 

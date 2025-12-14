@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,12 +14,14 @@ import {
   faShield,
   faServer,
   faCube,
-  IconDefinition,
+  faLock,
+  faBoxOpen,
 } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 import homepageConfig from "@/config/homepage.json";
 
 // Map string keys from config -> actual FontAwesome icons
-const iconMap: Record<string, IconDefinition> = {
+const iconMap = {
   faBolt,
   faUsers,
   faCalendar,
@@ -33,38 +35,53 @@ const iconMap: Record<string, IconDefinition> = {
 const MC_ADDRESS = "mc.indusrealms.com";
 const SERVER_IP_DISPLAY = "150.230.237.207:2016";
 
-// ---- Stats (bottom 3 cards) ----
-type StatItem = { title: string; description: string; icon?: keyof typeof iconMap };
-
-const defaultStats: StatItem[] = [
-  { title: "1+", description: "Active Players", icon: "faUsers" },
-  { title: "Online", description: "Status", icon: "faServer" },
-  { title: "Minecraft 1.21.8", description: "Version", icon: "faCube" },
-];
-
-const statsFromConfig: StatItem[] =
-  // @ts-ignore – JSON may or may not have stats
-  (Array.isArray((homepageConfig as any).stats) ? (homepageConfig as any).stats : []) || [];
-
-const statsToRender: StatItem[] =
-  statsFromConfig.length > 0
-    ? statsFromConfig.map((s: any) => ({
-        title: String(s.title ?? ""),
-        description: String(s.description ?? ""),
-        icon: s.icon as keyof typeof iconMap | undefined,
-      }))
-    : defaultStats;
+// ---- Server status type ----
+type StatusResponse = {
+  online: boolean;
+  players: number;
+  max: number;
+  version: string | null;
+};
 
 export default function HomePage() {
   const [buttonText, setButtonText] = useState(homepageConfig.hero.buttonText);
   const [isClicked, setIsClicked] = useState(false);
+
+  const [status, setStatus] = useState<StatusResponse | null>(null);
+  const [statusLoading, setStatusLoading] = useState(true);
+
+  // 🛰 Fetch server status from our API
+  useEffect(() => {
+    const loadStatus = async () => {
+      try {
+        const res = await fetch("/api/server-status", { cache: "no-store" });
+        const json = (await res.json()) as StatusResponse;
+        setStatus(json);
+      } catch (err) {
+        console.error("Failed to load server status:", err);
+        setStatus({
+          online: false,
+          players: 0,
+          max: 0,
+          version: null,
+        });
+      } finally {
+        setStatusLoading(false);
+      }
+    };
+
+    loadStatus();
+
+    // optional auto-refresh
+    const id = setInterval(loadStatus, 30000);
+    return () => clearInterval(id);
+  }, []);
 
   const handleButtonClick = async () => {
     try {
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(MC_ADDRESS);
       } else {
-        // Fallback for older browsers
         const ta = document.createElement("textarea");
         ta.value = MC_ADDRESS;
         ta.style.position = "fixed";
@@ -84,6 +101,19 @@ export default function HomePage() {
       alert("Copy failed. Please copy manually: " + MC_ADDRESS);
     }
   };
+
+  // Derived texts for cards
+  const playersText = statusLoading
+    ? "…"
+    : status
+    ? String(status.players)
+    : "0";
+
+  const statusText = statusLoading ? "Checking..." : status?.online ? "Online" : "Offline";
+
+  const versionText = statusLoading
+    ? "Loading..."
+    : status?.version || "Unknown";
 
   return (
     <div className="min-h-screen page-fade-bottom">
@@ -134,32 +164,111 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Stats (replaces old 4.9/5 Rating) */}
+          {/* Stats (dynamic) */}
           <div className="mt-8 sm:mt-12">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {statsToRender.map((stat, i) => {
-                const icon = stat.icon ? iconMap[stat.icon] : undefined;
-                return (
-                  <div
-                    key={i}
-                    className="card-brand rounded-lg p-6 flex flex-col items-center text-center"
-                  >
-                    {icon && (
-                      <div
-                        className="text-3xl mb-3"
-                        style={{ color: "var(--brand-yellow)" }}
-                        aria-hidden
-                      >
-                        <FontAwesomeIcon icon={icon} />
-                      </div>
-                    )}
-                    <div className="text-3xl font-bold text-white">{stat.title}</div>
-                    <div className="mt-1 text-sm uppercase tracking-wide text-gray-300">
-                      {stat.description}
-                    </div>
+              {/* Players */}
+              <div className="card-brand rounded-lg p-6 flex flex-col items-center text-center">
+                <div
+                  className="text-3xl mb-3"
+                  style={{ color: "var(--brand-yellow)" }}
+                  aria-hidden
+                >
+                  <FontAwesomeIcon icon={faUsers} />
+                </div>
+                <div className="text-3xl font-bold text-white">{playersText}</div>
+                <div className="mt-1 text-sm uppercase tracking-wide text-gray-300">
+                  Currently Online
+                </div>
+              </div>
+
+              {/* Status */}
+              <div className="card-brand rounded-lg p-6 flex flex-col items-center text-center">
+                <div
+                  className="text-3xl mb-3"
+                  style={{ color: "var(--brand-yellow)" }}
+                  aria-hidden
+                >
+                  <FontAwesomeIcon icon={faServer} />
+                </div>
+                <div className="text-3xl font-bold text-white">{statusText}</div>
+                <div className="mt-1 text-sm uppercase tracking-wide text-gray-300">
+                  Status
+                </div>
+              </div>
+
+              {/* Version */}
+              <div className="card-brand rounded-lg p-6 flex flex-col items-center text-center">
+                <div
+                  className="text-3xl mb-3"
+                  style={{ color: "var(--brand-yellow)" }}
+                  aria-hidden
+                >
+                  <FontAwesomeIcon icon={faCube} />
+                </div>
+                <div className="text-3xl font-bold text-white">{versionText}</div>
+                <div className="mt-1 text-sm uppercase tracking-wide text-gray-300">
+                  Version
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* STORE CTA */}
+          <div className="mt-10 sm:mt-14">
+            <div className="relative max-w-5xl mx-auto">
+              <div
+                className="
+                  ir-card
+                  relative
+                  flex flex-col md:flex-row items-center justify-between gap-6
+                  px-6 sm:px-10 py-6 sm:py-7
+                  rounded-[26px]
+                  border border-[rgba(255,174,45,0.18)]
+                  bg-[rgba(9,5,4,0.94)]
+                  shadow-[0_24px_60px_rgba(0,0,0,0.9)]
+                  overflow-hidden
+                  backdrop-blur-[2px]
+                "
+              >
+                {/* left side */}
+                <div className="relative z-10 text-left max-w-xl">
+                  <div className="inline-flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full bg-[rgba(0,0,0,0.55)] text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-[#ffdfa0]">
+                    <FontAwesomeIcon icon={faLock} className="text-xs" />
+                    <span>Indus Realms Store</span>
                   </div>
-                );
-              })}
+
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                    Gear up before you join the realms.
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-300 mb-4">
+                    Unlock exclusive ranks, coin packs and premium perks that support the
+                    server and make every session feel special.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 text-[0.7rem] sm:text-[0.75rem]">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[rgba(0,0,0,0.7)] text-gray-200">
+                      ⚡ Instant delivery
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[rgba(0,0,0,0.7)] text-gray-200">
+                      ❤️ Support the server
+                    </span>
+                  </div>
+                </div>
+
+                {/* right side button */}
+                <div className="relative z-10">
+                  <Link href="/store/ranks">
+                    <Button className="px-6 sm:px-8 py-3 rounded-full bg-gradient-to-r from-[#ffb347] to-[#ff8400] text-[#1a0f0b] font-semibold text-sm sm:text-base shadow-[0_0_22px_rgba(255,180,60,0.65)] hover:scale-105 transition-transform flex items-center gap-2">
+                      <FontAwesomeIcon icon={faBoxOpen} className="text-sm sm:text-base" />
+                      <span>Check out our Store</span>
+                    </Button>
+                  </Link>
+                </div>
+
+                {/* subtle background glow */}
+                <div className="pointer-events-none absolute -inset-px opacity-25 bg-[radial-gradient(circle_at_left,_rgba(255,200,120,0.18),_transparent_55%),radial-gradient(circle_at_right,_rgba(255,120,50,0.18),_transparent_55%)]" />
+              </div>
             </div>
           </div>
         </div>
@@ -174,7 +283,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {homepageConfig.features.map((feature: any, index: number) => {
-              const icon = iconMap[feature.icon] ?? faBolt; // safe fallback
+              const icon = iconMap[feature.icon] ?? faBolt;
               return (
                 <div
                   key={index}

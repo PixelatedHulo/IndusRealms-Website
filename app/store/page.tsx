@@ -1,5 +1,6 @@
-import { redirect } from "next/navigation"
+import { redirect } from "next/navigation";
 
 export default function StorePage() {
-  redirect("/store/ranks")
+  // No session check here (handled in layout)
+  redirect("/store/ranks");
 }

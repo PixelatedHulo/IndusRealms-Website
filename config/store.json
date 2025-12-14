@@ -91,7 +91,6 @@
         }
       ]
     },
-
     "coins": {
       "title": "COIN PACKS [CLASSIC]",
       "items": [
@@ -165,122 +164,6 @@
             "Good for a single small purchase",
             "Perfect for first-time buyers",
             "Great micro-upgrade option"
-          ]
-        }
-      ]
-    },
-
-    "cosmetics": {
-      "title": "COSMETIC ITEMS",
-      "items": [
-        {
-          "name": "Fire Wings",
-          "price": "₹699",
-          "icon": "faMagic",
-          "description": "Blazing wings that leave a trail of fire particles behind you.",
-          "features": [
-            "Animated fire effects",
-            "Particle trail",
-            "Multiple color variants",
-            "Toggle on/off",
-            "Exclusive to store"
-          ]
-        },
-        {
-          "name": "Lava Crown",
-          "price": "₹999",
-          "icon": "faCrown",
-          "description": "A majestic crown that glows with molten lava effects.",
-          "features": [
-            "Glowing lava texture",
-            "Particle effects",
-            "Status symbol",
-            "Permanent unlock",
-            "Visible to all players"
-          ]
-        },
-        {
-          "name": "Dragon Pet",
-          "price": "₹1499",
-          "icon": "faMagic",
-          "description": "A loyal dragon companion that follows you around the server.",
-          "features": [
-            "Follows you everywhere",
-            "Interactive animations",
-            "Custom name",
-            "Special abilities",
-            "Rare and exclusive"
-          ]
-        },
-        {
-          "name": "Portal Trail",
-          "price": "₹499",
-          "icon": "faMagic",
-          "description": "Leave a mystical portal trail wherever you walk.",
-          "features": [
-            "Animated portal effects",
-            "Customizable colors",
-            "Toggle functionality",
-            "Visible to others",
-            "Unique visual effect"
-          ]
-        }
-      ]
-    },
-
-    "items": {
-      "title": "SPECIAL ITEMS",
-      "items": [
-        {
-          "name": "Flame Sword",
-          "price": "₹1299",
-          "icon": "faFistRaised",
-          "description": "A powerful sword that sets enemies ablaze with every strike.",
-          "features": [
-            "Fire Aspect III",
-            "Sharpness V",
-            "Unbreaking IV",
-            "Custom texture",
-            "Exclusive enchantments"
-          ]
-        },
-        {
-          "name": "Lava Pickaxe",
-          "price": "₹1099",
-          "icon": "faTools",
-          "description": "Mine faster than ever with this legendary lava-infused pickaxe.",
-          "features": [
-            "Efficiency VI",
-            "Fortune IV",
-            "Auto-smelt ability",
-            "Durability boost",
-            "Unique design"
-          ]
-        },
-        {
-          "name": "Phoenix Armor Set",
-          "price": "₹2499",
-          "icon": "faGem",
-          "description": "Complete armor set that grants fire immunity and special abilities.",
-          "features": [
-            "Fire immunity",
-            "Protection V",
-            "Custom texture",
-            "Set bonus effects",
-            "Legendary rarity"
-          ]
-        },
-        {
-          "name": "Teleport Bow",
-          "price": "₹1599",
-          "icon": "faFistRaised",
-          "description": "Teleport to wherever your arrow lands with this magical bow.",
-          "features": [
-            "Teleportation ability",
-            "Power V",
-            "Infinity enchant",
-            "Custom arrows",
-            "Unique mechanics"
           ]
         }
       ]

@@ -1,31 +1,31 @@
 {
   "title": "OUR STAFF TEAM",
-  "description": "Meet the dedicated team behind our server. Our staff members work tirelessly to ensure a fun and engaging environment for all players. Feel free to reach out to them if you need any assistance!",
+  "description": "Meet the core team behind Indus Realms. Our staff works together to keep the server fair, lively, and welcoming for every player.",
   "sections": [
     {
       "title": "Owners",
       "icon": "❤️",
       "members": [
         {
-          "name": "DuckgamingVI",
+          "name": "Gandhi",
+          "role": "Co-Founder",
+          "avatar": "https://minotar.net/helm/Gandhi/150.png",
+          "description": "Co-founder of Indus Realms, focused on long-term vision, community culture, and big feature decisions that shape the server.",
+          "discord": "https://discord.gg/SDBxkDJV69"
+        },
+        {
+          "name": "Hulo",
+          "role": "Co-Founder",
+          "avatar": "https://minotar.net/helm/Hulo/150.png",
+          "description": "Co-founder who lives in the details — balancing gameplay, progression, and events so every session feels fresh and engaging.",
+          "discord": "https://discord.gg/SDBxkDJV69"
+        },
+        {
+          "name": "Cyclops",
           "role": "Owner & Founder",
-          "avatar": "https://minotar.net/helm/DuckgamingVI/150.png",
-          "description": "Visionary behind Indus Realms — built from the ground up with passion for fair play, custom content, and endless adventure.",
-          "discord": "Iceyy4400"
-        },
-        {
-          "name": "ArgoKnight",
-          "role": "Co-Owner",
-          "avatar": "https://minotar.net/helm/ArgoKnight/150.png",
-          "description": "Oversees operations, community direction and major releases. Ensures smooth gameplay and high server uptime.",
-          "discord": "ArgoKnight#1024"
-        },
-        {
-          "name": "PixelSage",
-          "role": "Operations Lead",
-          "avatar": "https://minotar.net/helm/PixelSage/150.png",
-          "description": "Leads content roadmaps, seasonal events and partnerships. Focused on player experience and fairness.",
-          "discord": "PixelSage#4312"
+          "avatar": "https://minotar.net/helm/Cyclops/150.png",
+          "description": "Owner & founder leading the realm from day one, making sure every update feels polished, stable, and fun for the whole community.",
+          "discord": "https://discord.gg/SDBxkDJV69"
         }
       ]
     },
@@ -34,25 +34,11 @@
       "icon": "⭐",
       "members": [
         {
-          "name": "DuckgamingVI",
-          "role": "Head Administrator",
-          "avatar": "https://minotar.net/helm/DuckgamingVI/150.png",
-          "description": "Keeps the entire realm running like clockwork. Balances staff management, server moderation.",
-          "discord": "Iceyy4400"
-        },
-        {
-          "name": "BlockSmith",
-          "role": "Technical Administrator",
-          "avatar": "https://minotar.net/helm/BlockSmith/150.png",
-          "description": "Handles plugins, performance tuning and backend stability. Builds tools to keep Indus Realms blazing fast.",
-          "discord": "BlockSmith#2048"
-        },
-        {
-          "name": "LavaBloom",
-          "role": "Community Administrator",
-          "avatar": "https://minotar.net/helm/LavaBloom/150.png",
-          "description": "Manages staff schedules, applications and community guidelines. Keeps chats friendly and helpful.",
-          "discord": "LavaBloom#7788"
+          "name": "NEET",
+          "role": "Administrator",
+          "avatar": "https://minotar.net/helm/NEET/150.png",
+          "description": "Backend wizard keeping performance, security, and uptime under control while supporting the rest of the staff behind the scenes.",
+          "discord": "https://discord.gg/SDBxkDJV69"
         }
       ]
     },
@@ -61,25 +47,18 @@
       "icon": "🛡️",
       "members": [
         {
-          "name": "DuckgamingVI",
-          "role": "Senior Moderator",
-          "avatar": "https://minotar.net/helm/DuckgamingVI/150.png",
-          "description": "Leads the moderator team with experience and a watchful eye.",
-          "discord": "Iceyy4400"
+          "name": "Spirited",
+          "role": "Staff Supporter",
+          "avatar": "https://minotar.net/helm/Spirited/150.png",
+          "description": "Friendly frontline support, answering questions, guiding new players, and keeping chat calm during busy hours.",
+          "discord": "https://discord.gg/SDBxkDJV69"
         },
         {
-          "name": "CinderFox",
-          "role": "Moderator",
-          "avatar": "https://minotar.net/helm/CinderFox/150.png",
-          "description": "Active in-game support, reports handling and quick responses to rule issues during peak hours.",
-          "discord": "CinderFox#3399"
-        },
-        {
-          "name": "EchoRune",
-          "role": "Moderator",
-          "avatar": "https://minotar.net/helm/EchoRune/150.png",
-          "description": "Greets newcomers, helps with claims and mediates player disputes to keep the realm fun.",
-          "discord": "EchoRune#5521"
+          "name": "Aizen",
+          "role": "Staff Supporter",
+          "avatar": "https://minotar.net/helm/Aizen/150.png",
+          "description": "Sharp-eyed supporter watching over reports, tickets, and rule breaks to keep the server fair and enjoyable.",
+          "discord": "https://discord.gg/SDBxkDJV69"
         }
       ]
     }
@@ -88,6 +67,6 @@
     "title": "Want to Join Our Team?",
     "description": "We're always looking for dedicated players to join our staff team. Applications are reviewed regularly. Apply through our Discord server if you're interested!",
     "buttonText": "Join Discord Server",
-    "discordUrl": "https://discord.gg/argonix"
+    "discordUrl": "https://discord.gg/SDBxkDJV69"
   }
 }

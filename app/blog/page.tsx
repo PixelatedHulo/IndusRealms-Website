@@ -35,9 +35,21 @@ type DiscordItem = {
 // ---------- settings ----------
 const SHOW_TAG_FILTERS = true;
 const ALLOWED_TAGS = new Set([
-  "update","event","pvp","arena","tournament","contest",
-  "builds","community","performance","optimization",
-  "technical","guide","announcement","rewards","jobs",
+  "update",
+  "event",
+  "pvp",
+  "arena",
+  "tournament",
+  "contest",
+  "builds",
+  "community",
+  "performance",
+  "optimization",
+  "technical",
+  "guide",
+  "announcement",
+  "rewards",
+  "jobs",
 ]);
 
 const KEYWORD_COVERS: Record<string, string> = {
@@ -60,23 +72,70 @@ const KEYWORD_COVERS: Record<string, string> = {
 
 // ---------- helpers ----------
 const formatDate = (d: string) =>
-  new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  new Date(d).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
-const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
 
-const safeImage = (url?: string | null) => (!url ? "/placeholder.svg" : (url.startsWith("/") || url.startsWith("http")) ? url : "/placeholder.svg");
-const extractTags = (txt: string) => Array.from(txt.matchAll(/\[([^\]]+)\]/g)).map(m => (m[1] ?? "").trim().toLowerCase()).filter(Boolean);
+const safeImage = (url?: string | null) =>
+  !url
+    ? "/placeholder.svg"
+    : url.startsWith("/") || url.startsWith("http")
+    ? url
+    : "/placeholder.svg";
+
+const extractTags = (txt: string) =>
+  Array.from(txt.matchAll(/\[([^\]]+)\]/g))
+    .map((m) => (m[1] ?? "").trim().toLowerCase())
+    .filter(Boolean);
+
 const stripTags = (txt: string) => txt.replace(/\[[^\]]+\]\s*/g, "").trim();
-const findInlineCover = (text: string) => text.match(/\[img:(https?:\/\/[^\]\s]+)\]/i)?.[1] ?? text.match(/!\[[^\]]*\]\((https?:\/\/[^\s)]+)\)/i)?.[1] ?? null;
-const pickFirstAttachmentImage = (a?: DiscordItem["attachments"]) => (!a?.length ? null : (a.find(x => (x.content_type || "").startsWith("image/")) || a[0])?.url || null);
-const pickTitleAndBody = (raw: string) => { const parts = stripTags(raw).split("\n").map(s=>s.trim()).filter(Boolean); return { title: parts[0] || "Announcement", body: parts.slice(1).join(" ").trim() }; };
+
+const findInlineCover = (text: string) =>
+  text.match(/\[img:(https?:\/\/[^\]\s]+)\]/i)?.[1] ??
+  text.match(/!\[[^\]]*\]\((https?:\/\/[^\s)]+)\)/i)?.[1] ??
+  null;
+
+const pickFirstAttachmentImage = (a?: DiscordItem["attachments"]) =>
+  !a?.length
+    ? null
+    : (a.find((x) => (x.content_type || "").startsWith("image/")) || a[0])?.url || null;
+
+const pickTitleAndBody = (raw: string) => {
+  const parts = stripTags(raw)
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return {
+    title: parts[0] || "Announcement",
+    body: parts.slice(1).join(" ").trim(),
+  };
+};
+
 const sanitizeTags = (tags: string[]) =>
-  Array.from(new Set(tags.filter(t => t && !/\w+\.\w+/.test(t) && (ALLOWED_TAGS.size ? ALLOWED_TAGS.has(t) : true))));
+  Array.from(
+    new Set(
+      tags.filter(
+        (t) =>
+          t &&
+          !/\w+\.\w+/.test(t) &&
+          (ALLOWED_TAGS.size ? ALLOWED_TAGS.has(t) : true),
+      ),
+    ),
+  );
 
 const pickAutoCover = (title: string, content: string, tags: string[]) => {
   const hay = `${title} ${content}`.toLowerCase();
   for (const t of tags) if (KEYWORD_COVERS[t]) return KEYWORD_COVERS[t];
-  for (const kw of Object.keys(KEYWORD_COVERS)) if (hay.includes(kw)) return KEYWORD_COVERS[kw];
+  for (const kw of Object.keys(KEYWORD_COVERS))
+    if (hay.includes(kw)) return KEYWORD_COVERS[kw];
   return null;
 };
 
@@ -87,7 +146,9 @@ const transformDiscordToPosts = (items: DiscordItem[]): BlogPost[] =>
     const inline = findInlineCover(base);
     const imgFromAttachments = pickFirstAttachmentImage(m.attachments);
     const primary = inline || m.image || imgFromAttachments || null;
-    const tags = sanitizeTags(m.tags && m.tags.length ? m.tags : extractTags(base));
+    const tags = sanitizeTags(
+      m.tags && m.tags.length ? m.tags : extractTags(base),
+    );
     const auto = !primary ? pickAutoCover(title, base, tags) : null;
 
     return {
@@ -133,7 +194,7 @@ export default function ClientBlogPage() {
       try {
         const res = await fetch("/api/discord/announcements", {
           cache: "no-store",
-          // @ts-ignore — helps in some Next toolchains to force no ISR
+          // @ts-ignore
           next: { revalidate: 0 },
         });
         const data = await res.json().catch(() => ({}));
@@ -145,7 +206,9 @@ export default function ClientBlogPage() {
           }
           return;
         }
-        const items = transformDiscordToPosts(Array.isArray((data as any).items) ? (data as any).items : []);
+        const items = transformDiscordToPosts(
+          Array.isArray((data as any).items) ? (data as any).items : [],
+        );
         if (!cancelled) {
           if (items.length) {
             setPosts(items);
@@ -165,50 +228,91 @@ export default function ClientBlogPage() {
         if (!cancelled) setLoading(false);
       }
     })();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const sortedPosts = useMemo(
-    () => [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
-    [posts]
+    () =>
+      [...posts].sort(
+        (a, b) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime(),
+      ),
+    [posts],
   );
 
   const allTags = useMemo(() => {
-    const t = Array.from(new Set(sortedPosts.flatMap((post) => post.tags))).filter(Boolean);
-    return t.filter((x) => (ALLOWED_TAGS.size ? ALLOWED_TAGS.has(x) : true));
+    const t = Array.from(
+      new Set(sortedPosts.flatMap((post) => post.tags)),
+    ).filter(Boolean);
+    return t.filter((x) =>
+      ALLOWED_TAGS.size ? ALLOWED_TAGS.has(x) : true,
+    );
   }, [sortedPosts]);
 
-  const filteredPosts = useMemo(() => {
-    return sortedPosts.filter((post) =>
-      selectedTags.length === 0 || selectedTags.every((t) => post.tags.includes(t))
-    );
-  }, [sortedPosts, selectedTags]);
+  const filteredPosts = useMemo(
+    () =>
+      sortedPosts.filter(
+        (post) =>
+          selectedTags.length === 0 ||
+          selectedTags.every((t) => post.tags.includes(t)),
+      ),
+    [sortedPosts, selectedTags],
+  );
 
   const openPost = (post: BlogPost) => {
     setSelectedPost(post);
-    if (typeof document !== "undefined") document.body.style.overflow = "hidden";
+    if (typeof document !== "undefined")
+      document.body.style.overflow = "hidden";
   };
   const closePost = () => {
     setSelectedPost(null);
-    if (typeof document !== "undefined") document.body.style.overflow = "unset";
+    if (typeof document !== "undefined")
+      document.body.style.overflow = "unset";
   };
   const toggleTag = (tag: string) =>
-    setSelectedTags((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : prev.length < 3 ? [...prev, tag] : prev));
+    setSelectedTags((prev) =>
+      prev.includes(tag)
+        ? prev.filter((t) => t !== tag)
+        : prev.length < 3
+        ? [...prev, tag]
+        : prev,
+    );
   const clearAllTags = () => setSelectedTags([]);
 
   return (
     <div className="min-h-screen bg-brand-hero py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-gradient mb-2">
-            Server Blog <span className="text-xs opacity-70">[NEW BUILD]</span>
+        <div className="text-center mb-16 pt-10 sm:pt-14 md:pt-16 relative z-10">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gradient leading-tight pb-1 mb-4">
+            Server Blog
           </h1>
-          <p className={`text-xs mb-2 ${source === "discord" ? "text-green-400" : "text-yellow-400"}`}>
-            {source === "discord" ? "Live from Discord" : `Showing local posts${errorMsg ? ` (Discord: ${errorMsg})` : ""}`}
+
+          {/* small NEW BUILD badge separate from heading so text doesn't clip */}
+          <div className="flex justify-center mb-2">
+            <span className="px-3 py-1 rounded-full bg-[rgba(0,0,0,0.45)] text-[0.7rem] uppercase tracking-[0.25em] text-[var(--brand-yellow)]">
+              New Build
+            </span>
+          </div>
+
+          <p
+            className={`text-xs mb-2 ${
+              source === "discord"
+                ? "text-green-400"
+                : "text-yellow-400"
+            }`}
+          >
+            {source === "discord"
+              ? "Live from Discord"
+              : `Showing local posts${
+                  errorMsg ? ` (Discord: ${errorMsg})` : ""
+                }`}
           </p>
           <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Stay updated with the latest server news, updates, events, and community highlights.
+            Stay updated with the latest server news, updates, events, and
+            community highlights.
           </p>
 
           {SHOW_TAG_FILTERS && allTags.length > 0 && (
@@ -220,7 +324,10 @@ export default function ClientBlogPage() {
                     onClick={() => toggleTag(tag)}
                     variant="outline"
                     size="sm"
-                    disabled={!selectedTags.includes(tag) && selectedTags.length >= 3}
+                    disabled={
+                      !selectedTags.includes(tag) &&
+                      selectedTags.length >= 3
+                    }
                     className={
                       selectedTags.includes(tag)
                         ? "btn-primary text-black"
@@ -234,16 +341,32 @@ export default function ClientBlogPage() {
 
               {selectedTags.length > 0 && (
                 <div className="flex flex-wrap justify-center items-center gap-2 mb-4">
-                  <span className="text-sm text-gray-400">Selected tags ({selectedTags.length}/3):</span>
+                  <span className="text-sm text-gray-400">
+                    Selected tags ({selectedTags.length}/3):
+                  </span>
                   {selectedTags.map((tag) => (
-                    <span key={tag} className="px-3 py-1 bg-[rgba(255,138,0,0.25)] text-[var(--brand-yellow)] text-sm rounded-full flex items-center gap-2">
+                    <span
+                      key={tag}
+                      className="px-3 py-1 bg-[rgba(255,138,0,0.25)] text-[var(--brand-yellow)] text-sm rounded-full flex items-center gap-2"
+                    >
                       {tag}
-                      <button onClick={() => toggleTag(tag)} className="hover:text-white transition-colors">
-                        <FontAwesomeIcon icon={faTimes as any} className="w-3 h-3" />
+                      <button
+                        onClick={() => toggleTag(tag)}
+                        className="hover:text-white transition-colors"
+                      >
+                        <FontAwesomeIcon
+                          icon={faTimes as any}
+                          className="w-3 h-3"
+                        />
                       </button>
                     </span>
                   ))}
-                  <Button onClick={clearAllTags} variant="ghost" size="sm" className="text-[var(--brand-orange)] hover:text-[var(--brand-yellow)] hover:bg-[rgba(255,138,0,0.1)] text-xs">
+                  <Button
+                    onClick={clearAllTags}
+                    variant="ghost"
+                    size="sm"
+                    className="text-[var(--brand-orange)] hover:text-[var(--brand-yellow)] hover:bg-[rgba(255,138,0,0.1)] text-xs"
+                  >
                     Clear All
                   </Button>
                 </div>
@@ -252,11 +375,14 @@ export default function ClientBlogPage() {
           )}
         </div>
 
-        {/* Loader / skeleton (prevents “glimpse”) */}
+        {/* Loader / skeleton */}
         {loading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="animate-pulse card-brand overflow-hidden">
+              <div
+                key={i}
+                className="animate-pulse card-brand overflow-hidden"
+              >
                 <div className="h-48 bg-white/10" />
                 <div className="p-6 space-y-3">
                   <div className="h-6 bg-white/10 rounded" />
@@ -288,25 +414,36 @@ export default function ClientBlogPage() {
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gradient mb-3 line-clamp-2">{post.title}</h3>
+                    <h3 className="text-xl font-bold text-gradient mb-3 line-clamp-2">
+                      {post.title}
+                    </h3>
                     <p className="text-gray-300 mb-4 group-hover:text-gray-200 transition-colors line-clamp-3">
                       {post.excerpt}
                     </p>
 
                     <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
                       <div className="flex items-center space-x-2">
-                        <FontAwesomeIcon icon={faCalendar as any} className="w-4 h-4 text-[var(--brand-orange)]" />
+                        <FontAwesomeIcon
+                          icon={faCalendar as any}
+                          className="w-4 h-4 text-[var(--brand-orange)]"
+                        />
                         <span>{formatDate(post.date)}</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <FontAwesomeIcon icon={faUser as any} className="w-4 h-4 text-[var(--brand-yellow)]" />
+                        <FontAwesomeIcon
+                          icon={faUser as any}
+                          className="w-4 h-4 text-[var(--brand-yellow)]"
+                        />
                         <span>{post.author}</span>
                       </div>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
                       {post.tags.map((tag) => (
-                        <span key={tag} className="px-2 py-1 bg-[rgba(255,138,0,0.15)] text-[var(--brand-yellow)] text-xs rounded-full border border-[rgba(255,138,0,0.3)]">
+                        <span
+                          key={tag}
+                          className="px-2 py-1 bg-[rgba(255,138,0,0.15)] text-[var(--brand-yellow)] text-xs rounded-full border border-[rgba(255,138,0,0.3)]"
+                        >
                           {tag}
                         </span>
                       ))}
@@ -318,7 +455,9 @@ export default function ClientBlogPage() {
 
             {filteredPosts.length === 0 && (
               <div className="text-center py-12">
-                <p className="text-gray-400 text-lg">No blog posts available.</p>
+                <p className="text-gray-400 text-lg">
+                  No blog posts available.
+                </p>
               </div>
             )}
           </>
@@ -329,9 +468,19 @@ export default function ClientBlogPage() {
           <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="card-brand border border-[rgba(255,138,0,0.25)] rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto backdrop-blur-sm">
               <div className="sticky top-0 bg-[rgba(21,6,18,0.8)] border-b border-[rgba(255,138,0,0.2)] p-4 flex items-center justify-between backdrop-blur-sm">
-                <h2 className="text-xl font-bold text-gradient truncate pr-4">{selectedPost.title}</h2>
-                <Button onClick={closePost} variant="ghost" size="sm" className="text-[var(--brand-orange)] hover:text-[var(--brand-yellow)] hover:bg-[rgba(255,138,0,0.1)] flex-shrink-0">
-                  <FontAwesomeIcon icon={faTimes as any} className="w-5 h-5" />
+                <h2 className="text-xl font-bold text-gradient truncate pr-4">
+                  {selectedPost.title}
+                </h2>
+                <Button
+                  onClick={closePost}
+                  variant="ghost"
+                  size="sm"
+                  className="text-[var(--brand-orange)] hover:text-[var(--brand-yellow)] hover:bg-[rgba(255,138,0,0.1)] flex-shrink-0"
+                >
+                  <FontAwesomeIcon
+                    icon={faTimes as any}
+                    className="w-5 h-5"
+                  />
                 </Button>
               </div>
 
@@ -349,19 +498,31 @@ export default function ClientBlogPage() {
                 <div className="flex flex-wrap items-center justify-between text-sm text-gray-400 mb-6 gap-4">
                   <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2">
-                      <FontAwesomeIcon icon={faCalendar as any} className="w-4 h-4 text-[var(--brand-orange)]" />
+                      <FontAwesomeIcon
+                        icon={faCalendar as any}
+                        className="w-4 h-4 text-[var(--brand-orange)]"
+                      />
                       <span>{formatDate(selectedPost.date)}</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <FontAwesomeIcon icon={faUser as any} className="w-4 h-4 text-[var(--brand-yellow)]" />
+                      <FontAwesomeIcon
+                        icon={faUser as any}
+                        className="w-4 h-4 text-[var(--brand-yellow)]"
+                      />
                       <span>{selectedPost.author}</span>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <FontAwesomeIcon icon={faTag as any} className="w-4 h-4 text-[var(--brand-orange)]" />
+                    <FontAwesomeIcon
+                      icon={faTag as any}
+                      className="w-4 h-4 text-[var(--brand-orange)]"
+                    />
                     <div className="flex flex-wrap gap-2">
                       {selectedPost.tags.map((tag) => (
-                        <span key={tag} className="px-2 py-1 bg-[rgba(255,138,0,0.15)] text-[var(--brand-yellow)] text-xs rounded-full border border-[rgba(255,138,0,0.3)]">
+                        <span
+                          key={tag}
+                          className="px-2 py-1 bg-[rgba(255,138,0,0.15)] text-[var(--brand-yellow)] text-xs rounded-full border border-[rgba(255,138,0,0.3)]"
+                        >
                           {tag}
                         </span>
                       ))}
@@ -370,11 +531,16 @@ export default function ClientBlogPage() {
                 </div>
 
                 <div className="prose prose-invert max-w-none">
-                  {(selectedPost.content || "").split("\n\n").map((paragraph, index) => (
-                    <p key={index} className="text-gray-300 leading-relaxed mb-4">
-                      {paragraph}
-                    </p>
-                  ))}
+                  {(selectedPost.content || "")
+                    .split("\n\n")
+                    .map((paragraph, index) => (
+                      <p
+                        key={index}
+                        className="text-gray-300 leading-relaxed mb-4"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
                 </div>
               </div>
             </div>

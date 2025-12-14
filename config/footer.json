@@ -2,30 +2,46 @@
   "socialLinks": [
     {
       "name": "Discord",
-      "url": "https://discord.gg/argonix",
+      "url": "https://discord.gg/SDBxkDJV69",
       "icon": "faDiscord"
     },
     {
       "name": "Twitter",
-      "url": "https://argonix.eu",
+      "url": "https://x.com/Indus_Realms?t=rWBMaufVXItWZGMwgz_6Qw&s=09",
       "icon": "faTwitter"
     },
     {
       "name": "YouTube",
-      "url": "https://argonix.eu",
+      "url": "https://www.youtube.com/channel/UCOvQjDntN27KRPVhKX4lcPA",
       "icon": "faYoutube"
     },
     {
       "name": "Instagram",
-      "url": "https://argonix.eu",
+      "url": "https://www.instagram.com/indusrealms?igsh=ZG4weXpkbHU3azRh",
       "icon": "faInstagram"
     }
   ],
+
+  "links": [
+    { "label": "Home", "href": "/" },
+    { "label": "Store", "href": "/store" },
+    { "label": "Vote", "href": "/vote" },
+    { "label": "Staff", "href": "/staff" },
+    { "label": "Rules", "href": "/rules" },
+
+    { "label": "Refund Policy", "href": "/refund" },
+    { "label": "Privacy Policy", "href": "/privacy" },
+    { "label": "Terms & Conditions", "href": "/terms" },
+    { "label": "Shipping Policy", "href": "/shipping" },
+    { "label": "Contact Us", "href": "/contact" }
+  ],
+
   "copyright": {
     "year": "2025",
     "text": "Minecraft server using the Fire Web Template. All rights reserved.",
     "disclaimer": "We are not associated with Microsoft or Mojang Studios in any way."
   },
+
   "credits": {
     "madeBy": "Iceyy",
     "withLove": "love",

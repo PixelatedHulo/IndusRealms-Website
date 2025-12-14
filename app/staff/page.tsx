@@ -13,7 +13,10 @@ const roleStyles = (sectionTitle: string) => {
   if (key.includes("owner"))
     return { header: "from-[#ffcc66] via-[#ffae2d] to-[#ff8800]" }; // bright gold
   if (key.includes("admin"))
-    return { header: "from-[#ffb366] via-[#ff8a1c] to-[#ff6600]" }; // warm orange
+    return {
+      // 💚 green gradient for admins
+      header: "from-[#6ee7b7] via-[#22c55e] to-[#15803d]",
+    };
   if (key.includes("mod"))
     return { header: "from-[#cdb4ff] via-[#a78bfa] to-[#8b5cf6]" }; // soft purple
   if (key.includes("helper"))
@@ -32,6 +35,7 @@ export default function StaffPage() {
     icon: string;
   }) => {
     const colors = roleStyles(title);
+    const isSmallRow = members.length <= 2;
 
     return (
       <section className="mb-20 text-center">
@@ -40,46 +44,83 @@ export default function StaffPage() {
           {title}
         </h2>
 
-        {/* Uniform 3-column layout */}
-        <div className="flex flex-wrap justify-center gap-8">
+        {/* Owners = grid, Admin + Mods (<=2) = centered row */}
+        <div
+          className={
+            isSmallRow
+              ? "flex flex-wrap justify-center gap-8"
+              : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"
+          }
+        >
           {members.map((member, index) => (
             <Card
               key={index}
-              className="ir-card overflow-hidden p-0 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-[rgba(255,180,60,0.2)] group w-[300px] sm:w-[320px] md:w-[340px] flex flex-col"
+              className="overflow-hidden p-0 w-full max-w-md flex flex-col bg-[#05070f]/95 border border-white/5 rounded-2xl shadow-[0_18px_45px_rgba(0,0,0,0.6)]"
             >
-              <div
-                className={`bg-gradient-to-b ${colors.header} px-6 py-6 text-center transition-all duration-500 group-hover:brightness-110`}
-              >
-                <Image
-                  src={member.avatar || "/placeholder.svg"}
-                  alt={member.name}
-                  width={96}
-                  height={96}
-                  className="rounded-full mx-auto mb-4 ring-4 ring-[#1a0f0b] outline outline-2 outline-[#ffd27a] group-hover:scale-110 transition-transform duration-300"
-                />
-                <h3 className="text-xl sm:text-2xl font-extrabold text-[#1a0f0b]">
-                  {member.name}
-                </h3>
-                <p className="text-[#1a0f0b]/85 text-sm sm:text-base">
-                  {member.role}
-                </p>
+              {/* Top Discord-style bar */}
+              <div className="bg-[#5865F2] px-4 py-3 flex items-center justify-between text-white">
+                <div className="flex items-center gap-2">
+                  <FontAwesomeIcon icon={faDiscord} className="text-lg" />
+                  <span className="text-sm font-semibold tracking-wide">
+                    Indus Realms
+                  </span>
+                </div>
+                <span className="text-[10px] px-2 py-2 rounded-full bg-white/15 uppercase tracking-[0.12em]">
+                  {title}
+                </span>
               </div>
 
-              <div className="p-6 flex flex-col grow justify-between">
-                <p className="text-sm sm:text-base text-[var(--ir-dim)] mb-6">
-                  {member.description}
+              {/* Banner + avatar */}
+              <div className={`relative h-32 bg-gradient-to-r ${colors.header}`}>
+                <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top,_#ffffff40,_transparent_55%)]" />
+
+                <div className="absolute -bottom-10 left-6 flex items-center gap-4">
+                  <div className="relative">
+                    <Image
+                      src={member.avatar || "/placeholder.svg"}
+                      alt={member.name}
+                      width={90}
+                      height={80}
+                      className="rounded-full ring-4 ring-[#05070f] outline outline-2 outline-white/60 object-cover"
+                    />
+                    {/* online dot */}
+                    <span className="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-[#05070f]" />
+                  </div>
+                  <div className="text-left drop-shadow-sm">
+                    <h3 className="text-2xl sm:text-[30px] font-extrabold text-white leading-tight">
+                      {member.name}
+                    </h3>
+                    <p className="mt-4 text-xs sm:text-sm font-medium text-white/80 [text-shadow:0_0_12px_rgba(0,0,0,0.8)]">
+                      {member.role}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="pt-14 px-6 pb-6 text-left text-[var(--ir-dim)]">
+                <p className="text-sm sm:text-[15px] leading-relaxed italic mb-5 text-white/85">
+                  “{member.description}”
                 </p>
 
-                {/* Centered Discord Button */}
-                <div className="mt-auto text-center">
+                <div className="h-px bg-white/10 mb-4" />
+
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] uppercase tracking-[0.16em] text-white/50">
+                    Staff Profile
+                  </span>
+
                   <Button
-                    className="bg-[#ffae2d] hover:bg-[#ff8a00] text-black font-semibold px-4 py-2 mt-4 transition-all duration-300 hover:scale-105 rounded-md"
+                    className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-2 transition-transform hover:scale-105"
                     onClick={() =>
-                      window.open(`https://discord.com/users/${member.discord}`, "_blank")
+                      window.open(
+                        member.discord || staffConfig.joinTeam.discordUrl,
+                        "_blank"
+                      )
                     }
                   >
-                    <FontAwesomeIcon icon={faDiscord} className="mr-2" />
-                    Discord
+                    <FontAwesomeIcon icon={faDiscord} className="text-sm" />
+                    View on Discord
                   </Button>
                 </div>
               </div>
